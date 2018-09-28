@@ -1,0 +1,24 @@
+<div style="margin-top: 70px">
+    <div class="form-group col-sm-offset-2 col-sm-6">
+      <div><%= "Почта:" %></div>
+      <div class="form-control col-sm-4"><%= @user.email %></div>
+    </div>
+    <div class="form-group col-sm-offset-2 col-sm-6">
+      <div><%= "Телефон:" %></div>
+      <div class="form-control col-sm-4"><%= @user.phone %></div>
+    </div>
+    <div class="form-group col-sm-offset-2 col-sm-6">
+      <div><%= "Имя:" %></div>
+      <div class="form-control col-sm-4"><%= @user.first_name %></div>
+    </div>
+    <div class="form-group col-sm-offset-2 col-sm-6">
+      <div><%= "Фамилия:" %></div>
+      <div class="form-control col-sm-4"><%= @user.last_name %></div>
+    </div>
+    <div class="form-group col-sm-offset-2 col-sm-6">
+      <%= link_to admin_user_path(@user), method: :delete, data: {confirm: "Удалить пользователя #{@user.email}?"} do %>
+        <button type="button" class="btn btn-danger">Удалить</button>
+      <% end %>
+    </div>
+</div>
+

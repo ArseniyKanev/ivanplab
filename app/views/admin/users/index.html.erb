@@ -1,0 +1,32 @@
+<div class="container" style="margin-top: 50px">
+  <h2>Пользователи</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user.email, admin_user_path(user) %>
+          </td>
+          <td style="text-align: right">
+            <%= link_to admin_user_path(user), method: :delete, data: {confirm: "Удалить пользователя #{user.email}?"} do %>
+              <%= fa_icon "trash", style: "color: red" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $("tr[data-link]").click(function() {
+      window.location = $(this).data('link');
+    });
+  });
+</script>

@@ -1,0 +1,25 @@
+ru:
+  error_404: "Извините, такой страницы нет."
+  piezzhev_lab: "Лаборатория Приезжева"
+  address: "© Лаборатория Приезжева %{year}. Все права защищены."
+  header: "Лаборатория Приезжева"
+  login: "Вход"
+  sign_out: "Выйти"
+  only_registered: "Доступ только для зарегистрированных пользоватеолей"
+  delete: "Удалить"
+  delete_request: "Заявка на удаление аккаунта отправлена."
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              blank: "Заполните текущий пароль"
+            email:
+              blank: "Заполните почту"
+              taken: "Пользователь с такой почтой уже зарегистрирован"
+            password:
+              blank: "Заполните пароль"
+            password_confirmation:
+              confirmation: "Не совпадает с паролем"

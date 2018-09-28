@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= favicon_link_tag 'atom.ico' %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IvanPLab</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:300,400,700' rel='stylesheet' type='text/css'>
+  <meta name="yandex-verification" content="a82b6f72fca470f3" />
+</head>
+<body>
+
+<%= render 'layouts/header' %>
+<%= yield %>
+<%= render 'layouts/footer' %>
+
+<% if notice %>
+  <div id="notice_wrapper">
+    <p class="notice"><%= notice %></p>
+  </div>
+<% elsif alert %>
+  <div id="notice_wrapper">
+    <p class="alert"><%= alert %></p>
+  </div>
+<% end %>
+
+</body>
+</html>

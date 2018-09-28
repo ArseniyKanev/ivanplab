@@ -1,0 +1,28 @@
+<header class="cd-header">
+  <div id="cd-logo"><a href="/"><%= t('header') %></a></div>
+  <nav class="cd-main-nav">
+    <ul>
+      <% Tab.order(:created_at).each_with_index do |tab, i| %>
+      <% next if i == 0 %>
+        <li>
+          <% if I18n.locale == :ru %>
+            <%= link_to tab.title_ru, tab_path(tab.title_en.downcase.tr(' ','_')) %>
+          <% else %>
+            <%= link_to tab.title_en, tab_path(tab.title_en.downcase.tr(' ','_')) %>
+          <% end %>
+        </li>
+      <% end %>
+      <li>
+        <% if user_signed_in? %>
+          <%= link_to current_user.email, edit_user_registration_path %>
+          <%= link_to t("sign_out"), destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to t("login"), new_user_session_path %>
+        <% end %>
+      </li>
+      <li>
+        <%= render 'layouts/lang' %>
+      </li>
+    </ul>
+  </nav>
+</header>

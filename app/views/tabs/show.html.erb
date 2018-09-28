@@ -1,0 +1,23 @@
+<section id="cd-intro">
+  <div id="cd-intro-background"></div>
+  <div id="cd-intro-tagline">
+    <h1><%= t('piezzhev_lab') %></h1>
+  </div>
+</section>
+
+<main class="cd-content">
+  <div class="cd-container">
+    <% if I18n.locale == :ru %>
+      <%= @tab.text_ru.html_safe %>
+    <% else %>
+      <%= @tab.text_en.html_safe %>
+    <% end %>
+  </div>
+  <a href="#0" class="cd-top">Top</a>
+</main>
+
+<% if @tab.slug == "about-us" %>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(100995242); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/100995242ns.gif" /></p></noscript>
+<% end %>

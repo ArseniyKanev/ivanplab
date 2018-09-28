@@ -1,0 +1,34 @@
+<div style="margin-top: 70px">
+  <%= form_for @tab, url: {action: "update"}, validate: true do |f| %>
+
+    <div class="form-group col-sm-offset-2 col-sm-6">
+      <%= f.label :for_registered, "Только для зарегистрированных пользователей:" %>
+      <%= f.check_box :for_registered %>
+    </div>
+
+    <div class="form-group col-sm-offset-2 col-sm-6">
+      <%= f.label :title_en, "Title en:" %>
+      <%= f.text_field :title_en, class: "form-control col-sm-6" %>
+    </div>
+
+    <div class="form-group col-sm-offset-2 col-sm-6">
+      <%= f.label :title_ru, "Title ru:" %>
+      <%= f.text_field :title_ru, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-offset-2 col-sm-8">
+      <%= f.label :text_en, "Text en:" %>
+      <%= f.cktext_area :text_en, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-offset-2 col-sm-8">
+      <%= f.label :text_ru, "Text ru:" %>
+      <%= f.cktext_area :text_ru, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-offset-2 col-sm-2">
+      <%= f.submit "Save", class: "btn btn-default" %>
+    </div>
+
+  <% end %>
+</div>
