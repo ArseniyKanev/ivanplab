@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.4.0"
+ruby "2.5.1"
 
 gem 'rails'
 gem 'pg'
@@ -29,7 +29,7 @@ end
 
 group :development do
   gem "letter_opener"
-  gem 'capistrano', '3.10.1'
+  gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-passenger'
