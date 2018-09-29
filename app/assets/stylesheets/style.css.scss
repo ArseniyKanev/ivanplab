@@ -4,7 +4,7 @@ html * {
 }
 
 *, *:after, *:before {
-  @include box-sizing(border-box)
+  box-sizing: border-box;
 }
 
 body {
@@ -77,10 +77,10 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    @include transform(translateY(-100%));
+    transform: translateY(-100%);
 
     &.is-visible {
-      @include transform(translateY($header-height-S));
+      transform: translateY($header-height-S);
     }
   }
 
@@ -103,11 +103,11 @@ a {
     ul {
       position: static;
       width: auto;
-      @include transform(translateY(0));
+      transform: translateY(0);
       line-height: $header-height-M;
 
       &.is-visible {
-        @include transform(translateY(0));
+        transform: translateY(0);
       }
     }
 
@@ -200,7 +200,7 @@ a {
     left: 0;
     width: 100%;
     height: 50px;
-    @include background(linear-gradient(to top, rgba($background, .5), rgba($background, 0)));
+    background: linear-gradient(to top, rgba($background, .5), rgba($background, 0));
 
     .no-cssgradients & {
       display: none;

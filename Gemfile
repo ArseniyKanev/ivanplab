@@ -20,7 +20,6 @@ gem 'client_side_validations'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-bootstrap-views'
-gem 'yaml_db'
 gem 'friendly_id'
 
 group :development, :test do
