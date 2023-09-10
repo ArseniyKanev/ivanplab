@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby "2.5.1"
+ruby "3.2.2"
 
-gem 'rails'
+gem 'rails', '~> 7.0', '>= 7.0.6'
 gem 'pg'
 gem 'sass-rails'
 gem 'uglifier'
@@ -35,3 +35,5 @@ group :development do
   gem 'web-console'
   gem 'spring'
 end
+
+gem "webrick", "~> 1.8"

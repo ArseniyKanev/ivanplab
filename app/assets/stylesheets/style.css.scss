@@ -22,12 +22,12 @@ a {
 
 
 .cd-content {
-  @include grid-container(100%);
+  // @include grid-container(100%);
 }
 
 .cd-container {
-  @include grid-column(10);
-  @include grid-shift(1);
+  // @include grid-column(10);
+  // @include grid-shift(1);
 }
 
 
