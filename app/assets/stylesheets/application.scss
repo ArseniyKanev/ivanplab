@@ -1,8 +1,9 @@
-@import "normalize-rails";
 @import "bourbon";
-@import "neat";
+@import "normalize-rails";
 @import "partials/variables";
 @import "partials/mixins";
 @import "partials/layout";
 @import "style";
-@import "font-awesome"
+@import "font-awesome";
+@import "froala_editor.min";
+@import "froala_style.min"

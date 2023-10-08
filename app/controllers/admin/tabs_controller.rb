@@ -11,7 +11,7 @@ class Admin::TabsController < ApplicationController
 
   def update
     @tab = Tab.find(params[:id])
-    @tab.update_attributes!(tab_params)
+    @tab.update!(tab_params)
     redirect_to admin_tabs_path
   end
 

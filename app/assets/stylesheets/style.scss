@@ -22,10 +22,19 @@ a {
 
 
 .cd-content {
-  // @include grid-container(100%);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .cd-container {
+  display: flex;
+  flex-direction: column;
+  // flex-basis: 100%;
+  // flex: 1;
+  margin-left: 8em;
+  margin-right: 8em;
   // @include grid-column(10);
   // @include grid-shift(1);
 }

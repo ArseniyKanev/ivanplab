@@ -11,15 +11,14 @@ gem 'jbuilder'
 gem 'sdoc', group: :doc
 gem 'font-awesome-rails'
 gem 'bourbon'
-gem 'neat'
 gem 'normalize-rails'
 gem 'geocoder'
-gem 'ckeditor'
 gem 'paperclip'
 gem 'client_side_validations'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-bootstrap-views'
+gem "wysiwyg-rails"
 gem 'friendly_id'
 
 group :development, :test do
