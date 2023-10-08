@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.11.0'
+lock '3.17.3'
 
 set :application, 'ivanplab'
 set :repo_url, 'git@github.com:ArseniyKanev/ivanplab.git'
@@ -40,8 +40,9 @@ set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/system', 'public/a
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+set :branch, "upgrade"
 
-set :rvm_ruby_version, '3.2.2'
+set :rvm_ruby_version, "3.2.2"
 
 namespace :deploy do
 

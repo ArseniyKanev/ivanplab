@@ -68,7 +68,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
-    airbrussh (1.4.2)
+    airbrussh (1.5.0)
       sshkit (>= 1.6.1, != 1.7.0)
     bcrypt (3.1.19)
     bindex (0.8.1)
@@ -167,6 +167,8 @@ GEM
     net-ssh (7.2.0)
     nio4r (2.5.9)
     nokogiri (1.15.4-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     normalize-rails (8.0.1)
     orm_adapter (0.5.0)
@@ -270,6 +272,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   bourbon
