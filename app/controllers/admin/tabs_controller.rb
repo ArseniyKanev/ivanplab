@@ -12,8 +12,8 @@ class Admin::TabsController < ApplicationController
 
   def update
     @tab = Tab.find(params[:id])
-    @tab.text_en.gsub!(FROALA_STR,  "")
-    @tab.text_ru.gsub!(FROALA_STR,  "")
+    tab_params[:text_en].gsub!(FROALA_STR,  "")
+    tab_params[:text_ruu].gsub!(FROALA_STR,  "")
     @tab.update!(tab_params)
     redirect_to admin_tabs_path
   end
@@ -24,8 +24,8 @@ class Admin::TabsController < ApplicationController
 
   def create
     @tab = Tab.new(tab_params)
-    @tab.text_en.gsub!(FROALA_STR,  "")
-    @tab.text_ru.gsub!(FROALA_STR,  "")
+    tab_params[:text_en].gsub!(FROALA_STR,  "")
+    tab_params[:text_ru].gsub!(FROALA_STR,  "")
     if @tab.save!
       redirect_to admin_tabs_path
     end
