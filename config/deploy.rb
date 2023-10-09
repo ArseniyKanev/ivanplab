@@ -42,6 +42,8 @@ set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/system', 'public/a
 # set :keep_releases, 5
 set :branch, "upgrade"
 
+set :bundle_flags, ''
+
 set :rvm_ruby_version, "3.2.2"
 
 namespace :deploy do
