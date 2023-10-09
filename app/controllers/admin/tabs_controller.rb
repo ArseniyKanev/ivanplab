@@ -13,7 +13,7 @@ class Admin::TabsController < ApplicationController
   def update
     @tab = Tab.find(params[:id])
     tab_params[:text_en].gsub!(FROALA_STR,  "")
-    tab_params[:text_ruu].gsub!(FROALA_STR,  "")
+    tab_params[:text_ru].gsub!(FROALA_STR,  "")
     @tab.update!(tab_params)
     redirect_to admin_tabs_path
   end
