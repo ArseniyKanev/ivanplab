@@ -2,7 +2,7 @@ en:
   error_404: "Sorry! No such page!"
   piezzhev_lab: "Priezzhev Lab"
   address: "© IPLab %{year}. All rights reserved."
-  header: "IPLab"
+  header: "IPLAB LLC"
   login: "Sign in"
   sign_out: "Sign out"
   only_registered: "Only for registered users"
