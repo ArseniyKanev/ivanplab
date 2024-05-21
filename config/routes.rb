@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  mount Ckeditor::Engine => '/ckeditor'
   devise_for :users, controllers:  { registrations: "registrations", sessions: "sessions", passwords: "passwords"}
+
+  post "/upload_file" => "upload#upload_file", as: :upload_file
+  post "/upload_image" => "upload#upload_image", as: :upload_image
+
+  get "/download_file/:name" => "upload#access_file", as: :upload_access_file, name: /.*/
+
 
   devise_scope :user do
     get 'users/send_email', to: 'registrations#send_email'

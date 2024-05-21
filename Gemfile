@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby "2.5.1"
+ruby "3.2.2"
 
-gem 'rails'
+gem 'rails', '~> 7.0', '>= 7.0.6'
 gem 'pg'
 gem 'sass-rails'
 gem 'uglifier'
@@ -11,15 +11,14 @@ gem 'jbuilder'
 gem 'sdoc', group: :doc
 gem 'font-awesome-rails'
 gem 'bourbon'
-gem 'neat'
 gem 'normalize-rails'
 gem 'geocoder'
-gem 'ckeditor'
 gem 'paperclip'
 gem 'client_side_validations'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-bootstrap-views'
+gem "wysiwyg-rails"
 gem 'friendly_id'
 
 group :development, :test do
@@ -35,3 +34,5 @@ group :development do
   gem 'web-console'
   gem 'spring'
 end
+
+gem "webrick", "~> 1.8"

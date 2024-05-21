@@ -1,5 +1,6 @@
 class Admin::TabsController < ApplicationController
   layout "admin"
+  FROALA_STR = '<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>'
 
   def index
     @tabs = Tab.order(created_at: :desc)
@@ -11,7 +12,9 @@ class Admin::TabsController < ApplicationController
 
   def update
     @tab = Tab.find(params[:id])
-    @tab.update_attributes!(tab_params)
+    tab_params[:text_en].gsub!(FROALA_STR,  "")
+    tab_params[:text_ru].gsub!(FROALA_STR,  "")
+    @tab.update!(tab_params)
     redirect_to admin_tabs_path
   end
 
@@ -21,6 +24,8 @@ class Admin::TabsController < ApplicationController
 
   def create
     @tab = Tab.new(tab_params)
+    tab_params[:text_en].gsub!(FROALA_STR,  "")
+    tab_params[:text_ru].gsub!(FROALA_STR,  "")
     if @tab.save!
       redirect_to admin_tabs_path
     end

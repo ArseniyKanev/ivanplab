@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.11.0'
+lock '3.17.3'
 
 set :application, 'ivanplab'
 set :repo_url, 'git@github.com:ArseniyKanev/ivanplab.git'
@@ -29,8 +29,8 @@ set :deploy_to, '/home/deploy/ivanplab'
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
 set :linked_files, %w{config/database.yml config/secrets.yml}
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/ckeditor_assets/pictures public/ckeditor_assets/attachments}
-set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/system', 'public/assets', 'public/ckeditor_assets/pictures', 'public/ckeditor_assets/attachments')
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/ckeditor_assets/pictures public/ckeditor_assets/attachments public/uploads}
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/system', 'public/assets', 'public/ckeditor_assets/pictures', 'public/ckeditor_assets/attachments', 'public/uploads')
 
 # Default value for linked_dirs is []
 # append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
@@ -40,8 +40,11 @@ set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/system', 'public/a
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+set :branch, "upgrade"
 
-set :rvm_ruby_version, '2.5.1'
+set :bundle_flags, ''
+
+set :rvm_ruby_version, "3.2.2"
 
 namespace :deploy do
 
