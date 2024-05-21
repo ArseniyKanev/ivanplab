@@ -3,7 +3,9 @@ html * {
   -moz-osx-font-smoothing: grayscale;
 }
 
-*, *:after, *:before {
+*,
+*:after,
+*:before {
   box-sizing: border-box;
 }
 
@@ -12,6 +14,7 @@ body {
     size: 100%;
     family: $primary-font;
   }
+
   color: $color-3;
   background-color: $background;
 }
@@ -68,6 +71,7 @@ a {
 }
 
 .cd-main-nav {
+  max-width: 70%;
   float: right;
   margin-right: 5%;
   width: 24px;
@@ -87,9 +91,15 @@ a {
 
     &.is-visible {
       transform: translateY($header-height-S);
+
       a {
         color: #fff;
+
+        @include MQ(L) {
+          color: $color-4;
+        }
       }
+
     }
   }
 
@@ -103,7 +113,7 @@ a {
     color: $color-4;
   }
 
-  @include MQ(H) {
+  @include MQ(L) {
     width: auto;
     height: auto;
     background: none;
@@ -120,7 +130,12 @@ a {
       }
     }
 
-    li {
+    li.main {
+      display: inline-block;
+      margin-left: 1em;
+    }
+
+    li.lang {
       display: inline-block;
       margin-left: 1em;
     }
@@ -138,12 +153,19 @@ a {
       text-transform: uppercase;
     }
   }
+
+  // @include MQ(S) {
+  //   li {
+  //     display: none;
+  //     margin-left: 1em;
+  //   }
+  // }
 }
 
 #cd-intro {
   position: relative;
   height: $intro-height-S;
-  margin-top: $header-height-S; //note change hear due to error
+  margin-top: $header-height-S;
   z-index: index($elements, intro-image);
 
   #cd-intro-background {
@@ -246,9 +268,11 @@ footer {
   min-height: 50px;
   padding: 15px 0;
   color: $color-2;
+
   & a {
     color: $color-2;
   }
+
   & div {
     width: 50%;
     margin: 10px auto;
@@ -290,7 +314,6 @@ footer {
 
   box-shadow: 0 0 10px rgba(#000, .05);
 
-  /* image replacement properties */
   overflow: hidden;
   text-indent: 100%;
   white-space: nowrap;
@@ -304,18 +327,20 @@ footer {
   -moz-transition: opacity .3s 0s, visibility 0s .3s;
   transition: opacity .3s 0s, visibility 0s .3s;
 
-  &.cd-is-visible, &.cd-fade-out, .no-touch &:hover {
+  &.cd-is-visible,
+  &.cd-fade-out,
+  .no-touch &:hover {
     -webkit-transition: opacity .3s 0s, visibility 0s 0s;
     -moz-transition: opacity .3s 0s, visibility 0s 0s;
     transition: opacity .3s 0s, visibility 0s 0s;
   }
 
-  &.cd-is-visible { /* the button becomes visible */
+  &.cd-is-visible {
     visibility: visible;
     opacity: 1;
   }
 
-  &.cd-fade-out { /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  &.cd-fade-out {
     opacity: .5;
   }
 
@@ -351,8 +376,8 @@ table {
 }
 
 img {
-    max-width: 100% !important;
-    height: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 #notice_wrapper {
@@ -361,7 +386,9 @@ img {
   width: 100%;
   z-index: 999;
   background: rgba(135, 216, 211, 0.85);
-  .alert, .notice {
+
+  .alert,
+  .notice {
     padding: 2.5rem 0;
     text-align: center;
     margin: 0;
@@ -369,5 +396,70 @@ img {
     font-weight: 700;
     color: #FFFFFF;
     letter-spacing: 1px;
+  }
+}
+
+.dropdown {
+  display: none;
+
+  @include MQ(L) {
+    display: inline-block;
+  }
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar a {
+  float: left;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 12px;
+  border: none;
+  outline: none;
+  color: $color-4;
+  background-color: inherit;
+  font-weight: bold;
+}
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: $color-4;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+li.more {
+  display: block;
+
+  @include MQ(L) {
+    display: none;
   }
 }

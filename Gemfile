@@ -20,6 +20,8 @@ gem 'devise-i18n'
 gem 'devise-bootstrap-views'
 gem "wysiwyg-rails"
 gem 'friendly_id'
+gem 'ed25519', '>= 1.2', '< 2.0'
+gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
 group :development, :test do
   gem 'byebug'
