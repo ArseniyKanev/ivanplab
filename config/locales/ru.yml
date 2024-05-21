@@ -8,6 +8,7 @@ ru:
   only_registered: "Доступ только для зарегистрированных пользоватеолей"
   delete: "Удалить"
   delete_request: "Заявка на удаление аккаунта отправлена."
+  more: "ЕЩЁ"
 
   activerecord:
     errors:

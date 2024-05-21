@@ -3,14 +3,42 @@
   <nav class="cd-main-nav">
     <ul>
       <% Tab.order(:created_at).each_with_index do |tab, i| %>
-      <% next if i == 0 %>
-        <li>
+        <% next if i == 0 %>
+        <% break if i > 5 %>
+        <li class="main">
           <% if I18n.locale == :ru %>
             <%= link_to tab.title_ru, tab_path(tab.title_en.downcase.tr(' ','_')) %>
           <% else %>
             <%= link_to tab.title_en, tab_path(tab.title_en.downcase.tr(' ','_')) %>
           <% end %>
         </li>
+      <% end %>
+      <% if Tab.count > 5 %>
+        <li class="dropdown">
+          <button class="dropbtn"><%= t('more') %>
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content" id="myDropdown">
+            <% Tab.order(:created_at).each_with_index do |tab, i| %>
+              <% next if i < 6 %>
+              <% if I18n.locale == :ru %>
+                <%= link_to tab.title_ru, tab_path(tab.title_en.downcase.tr(' ','_')) %>
+              <% else %>
+                <%= link_to tab.title_en, tab_path(tab.title_en.downcase.tr(' ','_')) %>
+              <% end %>
+            <% end %>
+          </div>
+        </li>
+        <% Tab.order(:created_at).each_with_index do |tab, i| %>
+          <% next if i < 6 %>
+          <li class="more">
+            <% if I18n.locale == :ru %>
+              <%= link_to tab.title_ru, tab_path(tab.title_en.downcase.tr(' ','_')) %>
+            <% else %>
+              <%= link_to tab.title_en, tab_path(tab.title_en.downcase.tr(' ','_')) %>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
       <%# <li> %>
         <%# <% if user_signed_in? %>
@@ -20,7 +48,7 @@
           <%# <%= link_to t("login"), new_user_session_path %>
         <%# <% end %>
       </li>
-      <li>
+      <li class="lang">
         <%= render 'layouts/lang' %>
       </li>
     </ul>
