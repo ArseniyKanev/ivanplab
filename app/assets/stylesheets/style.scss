@@ -71,7 +71,7 @@ a {
 }
 
 .cd-main-nav {
-  max-width: 70%;
+  max-width: 80%;
   float: right;
   margin-right: 5%;
   width: 24px;
@@ -132,12 +132,11 @@ a {
 
     li.main {
       display: inline-block;
-      margin-left: 1em;
     }
 
     li.lang {
       display: inline-block;
-      margin-left: 1em;
+      vertical-align: sub;
     }
 
     a {
@@ -153,13 +152,6 @@ a {
       text-transform: uppercase;
     }
   }
-
-  // @include MQ(S) {
-  //   li {
-  //     display: none;
-  //     margin-left: 1em;
-  //   }
-  // }
 }
 
 #cd-intro {
