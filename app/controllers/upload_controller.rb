@@ -5,9 +5,8 @@ class UploadController < ActionController::Base
     if params[:file]
       FileUtils::mkdir_p(Rails.root.join("public/uploads/files"))
 
-      ext = File.extname(params[:file].original_filename)
-      file_name = "#{SecureRandom.urlsafe_base64}#{ext}"
-      path = Rails.root.join("public/uploads/files/", file_name)
+      file_name = params[:file].original_filename
+      path = Rails.root.join("public/uploads/files/", params[:file].original_filename)
 
       File.open(path, "wb") {|f| f.write(params[:file].read)}
       view_file = Rails.root.join("/download_file/", file_name).to_s
