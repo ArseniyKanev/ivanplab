@@ -41,7 +41,7 @@ class UploadController < ActionController::Base
   def access_file
     if File.exist?(Rails.root.join("public", "uploads", "files", params[:name]))
       ext = File.extname(params[:name])
-      DownloadAction.new(filename: params[:name], user_id: current_user.id).save! unless IMAGE_EXT.include?(ext)
+      DownloadAction.new(filename: params[:name], user_id: current_user.id).save! unless (IMAGE_EXT.include?(ext) || ext == "")
       send_data File.read(Rails.root.join("public", "uploads", "files", params[:name])), disposition: "attachment"
     else
       render nothing: true
