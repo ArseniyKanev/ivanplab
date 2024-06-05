@@ -20,6 +20,11 @@
           <td style="text-align: left">
             <%= action.created_at %>
           </td>
+          <td style="text-align: right">
+            <%= link_to admin_download_action_path(action), method: :delete, data: {confirm: "Удалить запись загрузки #{action.user.email}?"} do %>
+              <%= fa_icon "trash", style: "color: red" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
