@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :tabs
       resources :users, only: [:index, :show, :create, :new, :destroy, :edit, :update]
       resources :resources, only: :index
+      resources :download_actions, only: [:index, :destroy]
     end
   end
 end
