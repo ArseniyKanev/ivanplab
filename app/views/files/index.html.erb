@@ -1,0 +1,68 @@
+<main class="files-content">
+  <div class="files-container">
+    <h1>File Manager</h1>
+
+<div class="file-manager-header">
+  <div class="current-directory">
+    <p>Current Directory: <%= @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %></p>
+  </div>
+
+  <div class="create-folder">
+    <%= form_with url: files_create_folder_path, local: true do %>
+      <div class="field">
+        <%= label_tag :folder_name, "Create New Folder:" %>
+        <%= text_field_tag :folder_name %>
+      </div>
+      <%= submit_tag "Create" %>
+
+      <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
+    <% end %>
+  </div>
+
+  <div class="upload-file">
+    <%= form_with url: files_upload_file_path, local: true, multipart: true do %>
+      <div class="field">
+        <%= label_tag :file, "Upload a File:" %>
+        <%= file_field_tag :file %>
+      </div>
+      <%= submit_tag "Upload" %>
+
+      <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
+    <% end %>
+  </div>
+</div>
+
+    <hr>
+
+    <ul>
+      <% if params[:dir].present? && params[:dir] != "/" %>
+        <% previous_dir = File.dirname(params[:dir]) %>
+        <li>
+          <%= link_to "...", files_path(dir: previous_dir) %>
+        </li>
+      <% end %>
+      <% if @directories.any? %>
+        <% @directories.each do |directory| %>
+          <li>
+            <%= link_to directory, files_path(dir: File.join(params[:dir] || '', directory)) %>
+            <%= link_to files_delete_folder_path(dir: File.join(params[:dir] || '', directory)), method: :delete, data: {confirm: "Удалить директорию #{directory}?"} do %>
+              <%= fa_icon "trash", style: "color: red" %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+      <% if @files.any? %>
+        <% @files.each do |file| %>
+          <li>
+            <%= link_to file, "/uploads/sharing/#{params[:dir]}/#{file}", target: '_blank' %>
+            <%= link_to files_delete_file_path(path: "/#{params[:dir]}/#{file}"), method: :delete, data: {confirm: "Удалить файл #{file}?"} do %>
+              <%= fa_icon "trash", style: "color: red" %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+  </div>
+  <a href="#0" class="cd-top">Top</a>
+</main>

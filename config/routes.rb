@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, skip: :registrations, controllers:  { sessions: "sessions", passwords: "passwords"}
 
+  get 'files', to: 'files#index'
+  delete 'files/delete_file', to: 'files#delete_file'
+  delete 'files/delete_folder', to: 'files#delete_folder'
+  post 'files/create_folder', to: 'files#create_folder'
+  post 'files/upload_file', to: 'files#upload_file'
+
   post "/upload_file" => "upload#upload_file", as: :upload_file
   post "/upload_image" => "upload#upload_image", as: :upload_image
   get "/download_file/:name" => "upload#access_file", as: :upload_access_file, name: /.*/
