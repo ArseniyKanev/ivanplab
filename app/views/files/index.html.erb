@@ -34,7 +34,7 @@
 
     <hr>
 
-    <ul>
+    <ul style="list-style-type: none">
       <% if params[:dir].present? && params[:dir] != "/" %>
         <% previous_dir = File.dirname(params[:dir]) %>
         <li>
@@ -43,21 +43,31 @@
       <% end %>
       <% if @directories.any? %>
         <% @directories.each do |directory| %>
-          <li>
-            <%= link_to directory, files_path(dir: File.join(params[:dir] || '', directory)) %>
-            <%= link_to files_delete_folder_path(dir: File.join(params[:dir] || '', directory)), method: :delete, data: {confirm: "Удалить директорию #{directory}?"} do %>
-              <%= fa_icon "trash", style: "color: red" %>
-            <% end %>
+          <li style="width: 20%; display: flex; justify-content: space-between">
+            <div>
+              <%= fa_icon "folder" %>
+              <%= link_to directory, files_path(dir: File.join(params[:dir] || '', directory)) %>
+            </div>
+            <div>
+              <%= link_to files_delete_folder_path(dir: File.join(params[:dir] || '', directory)), method: :delete, data: {confirm: "Удалить директорию #{directory}?"} do %>
+                <%= fa_icon "trash", style: "color: red" %>
+              <% end %>
+            </div>
           </li>
         <% end %>
       <% end %>
       <% if @files.any? %>
         <% @files.each do |file| %>
-          <li>
-            <%= link_to file, "/uploads/sharing/#{params[:dir]}/#{file}", target: '_blank' %>
-            <%= link_to files_delete_file_path(path: "/#{params[:dir]}/#{file}"), method: :delete, data: {confirm: "Удалить файл #{file}?"} do %>
-              <%= fa_icon "trash", style: "color: red" %>
-            <% end %>
+          <li style="width: 20%; display: flex; justify-content: space-between">
+            <div>
+              <%= fa_icon "file" %>
+              <%= link_to file, "/uploads/sharing/#{params[:dir]}/#{file}", target: '_blank' %>
+            </div>
+            <div>
+              <%= link_to files_delete_file_path(path: "/#{params[:dir]}/#{file}"), method: :delete, data: {confirm: "Удалить файл #{file}?"} do %>
+                <%= fa_icon "trash", style: "color: red" %>
+              <% end %>
+            </div>
           </li>
         <% end %>
       <% end %>

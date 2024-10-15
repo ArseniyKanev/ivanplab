@@ -9,6 +9,7 @@ ru:
   delete: "Удалить"
   delete_request: "Заявка на удаление аккаунта отправлена."
   more: "ЕЩЁ"
+  files: "Файлы"
 
   activerecord:
     errors:

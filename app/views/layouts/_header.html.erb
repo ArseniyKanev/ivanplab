@@ -27,6 +27,11 @@
                 <%= link_to tab.title_en, tab_path(tab.title_en.downcase.tr(' ','_')) %>
               <% end %>
             <% end %>
+            <% if I18n.locale == :ru %>
+              <%= link_to t('files'), files_path %>
+            <% else %>
+              <%= link_to t('files'), files_path %>
+            <% end %>
           </div>
         </li>
         <% Tab.order(:created_at).each_with_index do |tab, i| %>
@@ -39,6 +44,13 @@
             <% end %>
           </li>
         <% end %>
+        <li class="more">
+          <% if I18n.locale == :ru %>
+            <%= link_to t('files'), files_path %>
+          <% else %>
+            <%= link_to t('files'), files_path %>
+          <% end %>
+        </li>
       <% end %>
       <li class="main">
         <% if user_signed_in? %>
