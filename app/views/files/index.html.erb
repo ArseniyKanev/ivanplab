@@ -43,7 +43,7 @@
       <% end %>
       <% if @directories.any? %>
         <% @directories.each do |directory| %>
-          <li style="width: 20%; display: flex; justify-content: space-between">
+          <li style="width: 25%; display: flex; justify-content: space-between">
             <div>
               <%= fa_icon "folder" %>
               <%= link_to directory, files_path(dir: File.join(params[:dir] || '', directory)) %>
@@ -58,7 +58,7 @@
       <% end %>
       <% if @files.any? %>
         <% @files.each do |file| %>
-          <li style="width: 20%; display: flex; justify-content: space-between">
+          <li style="width: 25%; display: flex; justify-content: space-between">
             <div>
               <%= fa_icon "file" %>
               <%= link_to file, "/uploads/sharing/#{params[:dir]}/#{file}", target: '_blank' %>
