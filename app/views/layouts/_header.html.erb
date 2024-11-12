@@ -28,9 +28,9 @@
               <% end %>
             <% end %>
             <% if I18n.locale == :ru %>
-              <%= link_to t('files'), files_path %>
+              <%= link_to t('files'), download_path %>
             <% else %>
-              <%= link_to t('files'), files_path %>
+              <%= link_to t('files'), download_path %>
             <% end %>
           </div>
         </li>
@@ -46,9 +46,9 @@
         <% end %>
         <li class="more">
           <% if I18n.locale == :ru %>
-            <%= link_to t('files'), files_path %>
+            <%= link_to t('files'), download_path %>
           <% else %>
-            <%= link_to t('files'), files_path %>
+            <%= link_to t('files'), download_path %>
           <% end %>
         </li>
       <% end %>

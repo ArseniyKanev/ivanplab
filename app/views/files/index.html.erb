@@ -1,36 +1,40 @@
-<main class="files-content">
-  <div class="files-container">
-    <h1>File Manager</h1>
-
-<div class="file-manager-header">
-  <div class="current-directory">
-    <p>Current Directory: <%= @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %></p>
+<section id="cd-intro">
+  <div id="cd-intro-background"></div>
+  <div id="cd-intro-tagline">
   </div>
+</section>
 
-  <div class="create-folder">
-    <%= form_with url: files_create_folder_path, local: true do %>
-      <div class="field">
-        <%= label_tag :folder_name, "Create New Folder:" %>
-        <%= text_field_tag :folder_name %>
+<main class="cd-content">
+  <div class="cd-container">
+    <div class="file-manager-header">
+      <div class="current-directory">
+        <p>Current Directory: <%= @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %></p>
       </div>
-      <%= submit_tag "Create" %>
 
-      <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
-    <% end %>
-  </div>
+      <div class="create-folder">
+        <%= form_with url: files_create_folder_path, local: true do %>
+          <div class="field">
+            <%= label_tag :folder_name, "Create New Folder:" %>
+            <%= text_field_tag :folder_name %>
+          </div>
+          <%= submit_tag "Create" %>
 
-  <div class="upload-file">
-    <%= form_with url: files_upload_file_path, local: true, multipart: true do %>
-      <div class="field">
-        <%= label_tag :file, "Upload a File:" %>
-        <%= file_field_tag :file %>
+          <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
+        <% end %>
       </div>
-      <%= submit_tag "Upload" %>
 
-      <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
-    <% end %>
-  </div>
-</div>
+      <div class="upload-file">
+        <%= form_with url: files_upload_file_path, local: true, multipart: true do %>
+          <div class="field">
+            <%= label_tag :file, "Upload a File:" %>
+            <%= file_field_tag :file %>
+          </div>
+          <%= submit_tag "Upload" %>
+
+          <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
+        <% end %>
+      </div>
+    </div>
 
     <hr>
 
@@ -38,15 +42,15 @@
       <% if params[:dir].present? && params[:dir] != "/" %>
         <% previous_dir = File.dirname(params[:dir]) %>
         <li>
-          <%= link_to "...", files_path(dir: previous_dir) %>
+          <%= link_to "...", download_path(dir: previous_dir) %>
         </li>
       <% end %>
       <% if @directories.any? %>
         <% @directories.each do |directory| %>
-          <li style="width: 25%; display: flex; justify-content: space-between">
+          <li style="width: 40%; display: flex; justify-content: space-between">
             <div>
               <%= fa_icon "folder" %>
-              <%= link_to directory, files_path(dir: File.join(params[:dir] || '', directory)) %>
+              <%= link_to directory, download_path(dir: File.join(params[:dir] || '', directory)) %>
             </div>
             <div>
               <%= link_to files_delete_folder_path(dir: File.join(params[:dir] || '', directory)), method: :delete, data: {confirm: "Удалить директорию #{directory}?"} do %>
@@ -58,7 +62,7 @@
       <% end %>
       <% if @files.any? %>
         <% @files.each do |file| %>
-          <li style="width: 25%; display: flex; justify-content: space-between">
+          <li style="width: 40%; display: flex; justify-content: space-between">
             <div>
               <%= fa_icon "file" %>
               <%= link_to file, "/uploads/sharing/#{params[:dir]}/#{file}", target: '_blank' %>
@@ -72,7 +76,6 @@
         <% end %>
       <% end %>
     </ul>
-
   </div>
   <a href="#0" class="cd-top">Top</a>
 </main>
