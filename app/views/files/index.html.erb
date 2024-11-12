@@ -10,31 +10,32 @@
       <div class="current-directory">
         <p>Current Directory: <%= @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %></p>
       </div>
+        <% if @current_user.admin? %>
+          <div class="create-folder">
+            <%= form_with url: files_create_folder_path, local: true do %>
+              <div class="field">
+                <%= label_tag :folder_name, "Create New Folder:" %>
+                <%= text_field_tag :folder_name %>
+              </div>
+              <%= submit_tag "Create" %>
 
-      <div class="create-folder">
-        <%= form_with url: files_create_folder_path, local: true do %>
-          <div class="field">
-            <%= label_tag :folder_name, "Create New Folder:" %>
-            <%= text_field_tag :folder_name %>
+              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
+            <% end %>
           </div>
-          <%= submit_tag "Create" %>
 
-          <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
+          <div class="upload-file">
+            <%= form_with url: files_upload_file_path, local: true, multipart: true do %>
+              <div class="field">
+                <%= label_tag :file, "Upload a File:" %>
+                <%= file_field_tag :file %>
+              </div>
+              <%= submit_tag "Upload" %>
+
+              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
+            <% end %>
+          </div>
         <% end %>
       </div>
-
-      <div class="upload-file">
-        <%= form_with url: files_upload_file_path, local: true, multipart: true do %>
-          <div class="field">
-            <%= label_tag :file, "Upload a File:" %>
-            <%= file_field_tag :file %>
-          </div>
-          <%= submit_tag "Upload" %>
-
-          <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
-        <% end %>
-      </div>
-    </div>
 
     <hr>
 
@@ -52,11 +53,13 @@
               <%= fa_icon "folder" %>
               <%= link_to directory, download_path(dir: File.join(params[:dir] || '', directory)) %>
             </div>
-            <div>
-              <%= link_to files_delete_folder_path(dir: File.join(params[:dir] || '', directory)), method: :delete, data: {confirm: "Удалить директорию #{directory}?"} do %>
-                <%= fa_icon "trash", style: "color: red" %>
-              <% end %>
-            </div>
+            <% if @current_user.admin? %>
+              <div>
+                <%= link_to files_delete_folder_path(dir: File.join(params[:dir] || '', directory)), method: :delete, data: {confirm: "Удалить директорию #{directory}?"} do %>
+                  <%= fa_icon "trash", style: "color: red" %>
+                <% end %>
+              </div>
+            <% end %>
           </li>
         <% end %>
       <% end %>
@@ -67,11 +70,13 @@
               <%= fa_icon "file" %>
               <%= link_to file, "/uploads/sharing/#{params[:dir]}/#{file}", target: '_blank' %>
             </div>
-            <div>
-              <%= link_to files_delete_file_path(path: "/#{params[:dir]}/#{file}"), method: :delete, data: {confirm: "Удалить файл #{file}?"} do %>
-                <%= fa_icon "trash", style: "color: red" %>
-              <% end %>
-            </div>
+            <% if @current_user.admin? %>
+              <div>
+                <%= link_to files_delete_file_path(path: "/#{params[:dir]}/#{file}"), method: :delete, data: {confirm: "Удалить файл #{file}?"} do %>
+                  <%= fa_icon "trash", style: "color: red" %>
+                <% end %>
+              </div>
+            <% end %>
           </li>
         <% end %>
       <% end %>

@@ -1,7 +1,7 @@
 class FilesController < ApplicationController
     before_action :set_current_directory
     before_action :check_user_signed_in
-    before_action :is_admin?, only: [:delete_file, :delete_folder]
+    before_action :is_admin?, only: [:create_folder, :create_folder, :delete_file, :delete_folder]
 
     def index
       @directories = Dir.entries(@current_directory).select { |f| File.directory?(File.join(@current_directory, f)) && !['.', '..'].include?(f) }
@@ -20,7 +20,7 @@ class FilesController < ApplicationController
       end
     end
 
-    def upload_file
+    def create_folder
       uploaded_file = params[:file]
       if uploaded_file.present?
         file_path = File.join(@current_directory, uploaded_file.original_filename)
