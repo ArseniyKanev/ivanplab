@@ -20,7 +20,7 @@ class FilesController < ApplicationController
       end
     end
 
-    def create_folder
+    def upload_file
       uploaded_file = params[:file]
       if uploaded_file.present?
         file_path = File.join(@current_directory, uploaded_file.original_filename)
