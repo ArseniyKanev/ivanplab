@@ -35,7 +35,7 @@ class UploadController < ActionController::Base
   end
 
   def image_validation(ext)
-    raise "Not allowed" unless IMAGE_EXT.include?(ext)
+    raise "Not allowed" unless IMAGE_EXT.include?(ext.downcase)
   end
 
   def access_file
