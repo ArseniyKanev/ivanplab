@@ -23,21 +23,12 @@ a {
   text-decoration: none;
 }
 
-
-.cd-content {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
 .cd-container {
   display: flex;
   flex-direction: column;
   margin-left: 8em;
   margin-right: 8em;
 }
-
 
 .cd-header {
   position: fixed;
@@ -236,7 +227,6 @@ a {
     margin: 1em 0;
   }
 
-
   @include MQ(M) {
     line-height: 1.8;
 
@@ -420,8 +410,6 @@ img {
   background-color: inherit;
   font-weight: bold;
 }
-
-
 
 .dropdown-content {
   display: none;
