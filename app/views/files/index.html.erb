@@ -68,7 +68,7 @@
           <li style="width: 40%; display: flex; justify-content: space-between">
             <div>
               <%= fa_icon "file" %>
-              <%= link_to file, "/uploads/sharing/#{params[:dir]}/#{file}", target: '_blank' %>
+              <%= link_to file, upload_access_file_path(file, dir: params[:dir]), target: '_blank' %>
             </div>
             <% if @current_user.admin? %>
               <div>
