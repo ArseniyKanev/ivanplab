@@ -4,8 +4,18 @@ class FilesController < ApplicationController
     before_action :is_admin?, only: [:create_folder, :create_folder, :delete_file, :delete_folder]
 
     def index
-      @directories = Dir.entries(@current_directory).select { |f| File.directory?(File.join(@current_directory, f)) && !['.', '..'].include?(f) }
-      @files = Dir.entries(@current_directory).select { |f| File.file?(File.join(@current_directory, f)) }
+      @directories = Dir.entries(@current_directory)
+        .select { |f| File.directory?(File.join(@current_directory, f)) && !['.', '..'].include?(f) }
+        .map { |f| [File.join(@current_directory, f), File.ctime(File.join(@current_directory, f))] }
+        .sort_by { |_, ctime| ctime }
+        .reverse
+        .map { |f, _| File.basename(f) }
+      @files = Dir.entries(@current_directory)
+        .select { |f| File.file?(File.join(@current_directory, f)) }
+        .map { |f| [File.join(@current_directory, f), File.ctime(File.join(@current_directory, f))] }
+        .sort_by { |_, ctime| ctime }
+        .reverse
+        .map { |f, _| File.basename(f) }
     end
 
     def create_folder

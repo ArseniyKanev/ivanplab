@@ -40,7 +40,7 @@ set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/system', 'public/a
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-set :branch, "feature/files_sharing"
+set :branch, "master"
 
 set :bundle_flags, ''
 
