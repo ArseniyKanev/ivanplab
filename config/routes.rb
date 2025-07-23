@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, skip: :registrations, controllers:  { sessions: "sessions", passwords: "passwords"}
 
+  get 'knowledge_base', to: 'files#index'
   get 'download', to: 'files#index'
   delete 'files/delete_file', to: 'files#delete_file'
   delete 'files/delete_folder', to: 'files#delete_folder'

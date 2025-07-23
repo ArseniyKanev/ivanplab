@@ -8,9 +8,9 @@
   <div class="cd-container">
     <div class="file-manager-header">
       <div class="current-directory">
-        <p>Current Directory: <%= @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %></p>
+        <p>Current Directory: <%= @current_directory.to_s.gsub(@base_directory.to_s, '') %></p>
       </div>
-        <% if @current_user.admin? %>
+        <% if current_user && current_user.admin? %>
           <div class="create-folder">
             <%= form_with url: files_create_folder_path, local: true do %>
               <div class="field">
@@ -19,7 +19,7 @@
               </div>
               <%= submit_tag "Create" %>
 
-              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
+              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(@base_directory.to_s, '') %>
             <% end %>
           </div>
 
@@ -31,7 +31,7 @@
               </div>
               <%= submit_tag "Upload" %>
 
-              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(Rails.root.join('public', 'uploads', 'sharing').to_s, '') %>
+              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(@base_directory.to_s, '') %>
             <% end %>
           </div>
         <% end %>
@@ -53,7 +53,7 @@
               <%= fa_icon "folder" %>
               <%= link_to directory, download_path(dir: File.join(params[:dir] || '', directory)) %>
             </div>
-            <% if @current_user.admin? %>
+            <% if current_user && current_user.admin? %>
               <div>
                 <%= link_to files_delete_folder_path(dir: File.join(params[:dir] || '', directory)), method: :delete, data: {confirm: "Удалить директорию #{directory}?"} do %>
                   <%= fa_icon "trash", style: "color: red" %>
@@ -70,7 +70,7 @@
               <%= fa_icon "file" %>
               <%= link_to file, upload_access_file_path(file, dir: params[:dir]), target: '_blank' %>
             </div>
-            <% if @current_user.admin? %>
+            <% if current_user && current_user.admin? %>
               <div>
                 <%= link_to files_delete_file_path(path: "/#{params[:dir]}/#{file}"), method: :delete, data: {confirm: "Удалить файл #{file}?"} do %>
                   <%= fa_icon "trash", style: "color: red" %>
