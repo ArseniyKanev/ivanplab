@@ -45,10 +45,10 @@ class UploadController < ActionController::Base
       ext = File.extname(params[:name])
       DownloadAction.new(filename: params[:name], user_id: current_user.id).save! unless (IMAGE_EXT.include?(ext) || ext == "")
       send_data File.read(Rails.root.join("public", "uploads", "files", params[:name])), disposition: "attachment"
-    elsif File.exist?(File.join(@current_directory, params[:name]))
+    elsif File.exist?(File.join(params[:dir], params[:name]))
       ext = File.extname(params[:name])
       DownloadAction.new(filename: params[:name], user_id: current_user.id).save! unless (IMAGE_EXT.include?(ext) || ext == "")
-      send_data File.read(File.join(@current_directory, params[:name])), disposition: "attachment"
+      send_data File.read(File.join(params[:dir], params[:name])), disposition: "attachment"
     else
       render nothing: true
     end
@@ -57,7 +57,7 @@ class UploadController < ActionController::Base
   private
 
   def set_current_directory
-    base_directory = Rails.root.join('public', 'uploads', 'sharing')
+    base_directory = Rails.root.join('public', 'uploads', 'knowledge_base')
     @current_directory = params[:dir] ? File.join(base_directory, params[:dir]) : base_directory
   end
 end

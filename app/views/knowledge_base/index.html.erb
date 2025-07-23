@@ -43,7 +43,7 @@
       <% if params[:dir].present? && params[:dir] != "/" %>
         <% previous_dir = File.dirname(params[:dir]) %>
         <li>
-          <%= link_to "...", download_path(dir: previous_dir) %>
+          <%= link_to "...", knowledge_base_path(dir: previous_dir) %>
         </li>
       <% end %>
       <% if @directories.any? %>
@@ -51,7 +51,7 @@
           <li style="width: 40%; display: flex; justify-content: space-between">
             <div>
               <%= fa_icon "folder" %>
-              <%= link_to directory, download_path(dir: File.join(params[:dir] || '', directory)) %>
+              <%= link_to directory, knowledge_base_path(dir: File.join(params[:dir] || '', directory)) %>
             </div>
             <% if current_user && current_user.admin? %>
               <div>
@@ -68,7 +68,7 @@
           <li style="width: 40%; display: flex; justify-content: space-between">
             <div>
               <%= fa_icon "file" %>
-              <%= link_to file, upload_access_file_path(file, dir: params[:dir]), target: '_blank' %>
+              <%= link_to file, upload_access_file_path(file, dir: @current_directory), target: '_blank' %>
             </div>
             <% if current_user && current_user.admin? %>
               <div>
