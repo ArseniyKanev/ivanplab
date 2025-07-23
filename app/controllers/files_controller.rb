@@ -84,10 +84,7 @@ class FilesController < ApplicationController
     end
 
     def set_current_directory
-      @base_directory = Rails.root.join('public', 'uploads', 'sharing')
-      if request.path.start_with?('/knowledge_base')
-        @base_directory = Rails.root.join('public', 'uploads', 'knowledge_base')
-      end
+      @base_directory = Rails.root.join('public', 'uploads')
       @current_directory = params[:dir] ? File.join(@base_directory, params[:dir]) : @base_directory
     end
   end
