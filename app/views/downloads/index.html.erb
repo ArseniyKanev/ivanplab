@@ -6,81 +6,107 @@
 
 <main class="cd-content">
   <div class="cd-container">
-    <div class="file-manager-header">
-      <div class="current-directory">
-        <p>Current Directory: <%= @current_directory.to_s.gsub(@base_directory.to_s, '') %></p>
-      </div>
-        <% if current_user && current_user.admin? %>
-          <div class="create-folder">
-            <%= form_with url: downloads_create_folder_path, local: true do %>
-              <div class="field">
-                <%= label_tag :folder_name, "Create New Folder:" %>
-                <%= text_field_tag :folder_name %>
-              </div>
-              <%= submit_tag "Create" %>
-
-              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(@base_directory.to_s, '') %>
-            <% end %>
-          </div>
-
-          <div class="upload-file">
-            <%= form_with url: downloads_upload_file_path, local: true, multipart: true do %>
-              <div class="field">
-                <%= label_tag :file, "Upload a File:" %>
-                <%= file_field_tag :file %>
-              </div>
-              <%= submit_tag "Upload" %>
-
-              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(@base_directory.to_s, '') %>
-            <% end %>
-          </div>
+    <div class="download-page-header">
+      <div class="breadcrumb-nav">
+        <% if params[:dir].present? && params[:dir] != "/" %>
+          <% previous_dir = File.dirname(params[:dir]) %>
+          <%= link_to download_path(dir: previous_dir), class: "breadcrumb-link" do %>
+            <%= fa_icon "arrow-left", class: "fa-sm" %>
+            <span>Back</span>
+          <% end %>
         <% end %>
+        <div class="current-path">
+          <%= fa_icon "folder-open", class: "fa-sm" %>
+          <span><%= @current_directory.to_s.gsub(@base_directory.to_s, '') || '/' %></span>
+        </div>
       </div>
 
-    <hr>
+      <% if current_user && current_user.admin? %>
+        <div class="admin-actions">
+          <div class="action-card">
+            <%= form_with url: downloads_create_folder_path, local: true, class: "inline-form" do %>
+              <%= text_field_tag :folder_name, nil, placeholder: "Folder name", class: "modern-input" %>
+              <%= submit_tag "Create Folder", class: "btn-modern btn-primary" %>
+              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(@base_directory.to_s, '') %>
+            <% end %>
+          </div>
 
-    <ul style="list-style-type: none">
-      <% if params[:dir].present? && params[:dir] != "/" %>
-        <% previous_dir = File.dirname(params[:dir]) %>
-        <li>
-          <%= link_to "...", download_path(dir: previous_dir) %>
-        </li>
+          <div class="action-card">
+            <%= form_with url: downloads_upload_file_path, local: true, multipart: true, class: "inline-form" do %>
+              <label class="file-upload-btn">
+                <%= file_field_tag :file, class: "file-input" %>
+                <%= fa_icon "upload", class: "fa-sm" %>
+                <span class="file-label-text">Choose File</span>
+              </label>
+              <span class="file-name-display"></span>
+              <%= submit_tag "Upload", class: "btn-modern btn-secondary" %>
+              <%= hidden_field_tag :dir, @current_directory.to_s.gsub(@base_directory.to_s, '') %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
+    </div>
+
+    <div class="download-content">
       <% if @directories.any? %>
-        <% @directories.each do |directory| %>
-          <li style="width: 40%; display: flex; justify-content: space-between">
-            <div>
-              <%= fa_icon "folder" %>
-              <%= link_to directory, download_path(dir: File.join(params[:dir] || '', directory)) %>
-            </div>
-            <% if current_user && current_user.admin? %>
-              <div>
-                <%= link_to downloads_delete_folder_path(dir: File.join(params[:dir] || '', directory)), method: :delete, data: {confirm: "Удалить директорию #{directory}?"} do %>
-                  <%= fa_icon "trash", style: "color: red" %>
+        <div class="folders-section">
+          <h3 class="section-title">
+            <%= fa_icon "folder", class: "fa-sm" %>
+            <span>Folders</span>
+          </h3>
+          <ul class="folders-list">
+            <% @directories.each do |directory| %>
+              <li class="folder-item">
+                <%= link_to download_path(dir: File.join(params[:dir] || '', directory)), class: "folder-link" do %>
+                  <div class="folder-icon">
+                    <%= fa_icon "folder", class: "fa-sm" %>
+                  </div>
+                  <span class="folder-name"><%= directory %></span>
                 <% end %>
-              </div>
+                <% if current_user && current_user.admin? %>
+                  <%= link_to downloads_delete_folder_path(dir: File.join(params[:dir] || '', directory)), method: :delete, data: {confirm: "Удалить директорию #{directory}?"}, class: "delete-btn" do %>
+                    <%= fa_icon "trash", class: "fa-sm" %>
+                  <% end %>
+                <% end %>
+              </li>
             <% end %>
-          </li>
-        <% end %>
+          </ul>
+        </div>
       <% end %>
+
       <% if @files.any? %>
-        <% @files.each do |file| %>
-          <li style="width: 40%; display: flex; justify-content: space-between">
-            <div>
-              <%= fa_icon "file" %>
-              <%= link_to file, upload_access_file_path(file, dir: @current_directory), target: '_blank' %>
-            </div>
-            <% if current_user && current_user.admin? %>
-              <div>
-                <%= link_to downloads_delete_file_path(path: "/#{params[:dir]}/#{file}"), method: :delete, data: {confirm: "Удалить файл #{file}?"} do %>
-                  <%= fa_icon "trash", style: "color: red" %>
+        <div class="files-section">
+          <h3 class="section-title">
+            <%= fa_icon "file", class: "fa-sm" %>
+            <span>Files</span>
+          </h3>
+          <ul class="files-list">
+            <% @files.each do |file| %>
+              <li class="file-item">
+                <%= link_to upload_access_file_path(file, dir: @current_directory), target: '_blank', class: "file-link" do %>
+                  <div class="file-icon">
+                    <%= fa_icon "file", class: "fa-sm" %>
+                  </div>
+                  <span class="file-name"><%= file %></span>
                 <% end %>
-              </div>
+                <% if current_user && current_user.admin? %>
+                  <%= link_to downloads_delete_file_path(path: "/#{params[:dir]}/#{file}"), method: :delete, data: {confirm: "Удалить файл #{file}?"}, class: "delete-btn" do %>
+                    <%= fa_icon "trash", class: "fa-sm" %>
+                  <% end %>
+                <% end %>
+              </li>
             <% end %>
-          </li>
-        <% end %>
+          </ul>
+        </div>
       <% end %>
-    </ul>
+
+      <% if @directories.empty? && @files.empty? %>
+        <div class="empty-state">
+          <%= fa_icon "folder-open", class: "fa-2x" %>
+          <p>This folder is empty</p>
+        </div>
+      <% end %>
+    </div>
   </div>
   <a href="#0" class="cd-top">Top</a>
 </main>

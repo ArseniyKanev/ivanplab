@@ -102,6 +102,17 @@ a {
     background: $background;
     border: 1px solid lighten($background, 3%);
     color: $color-4;
+
+    &.flag-link {
+      display: inline-block !important;
+      height: auto !important;
+      line-height: 1 !important;
+      padding: 0.5em 0.4em !important;
+      margin: 0 3px !important;
+      vertical-align: middle;
+      background: transparent !important;
+      border: none !important;
+    }
   }
 
   @include MQ(L) {
@@ -127,7 +138,7 @@ a {
 
     li.lang {
       display: inline-block;
-      vertical-align: sub;
+      vertical-align: middle;
     }
 
     a {
@@ -205,19 +216,6 @@ a {
   background-color: $color-2;
   z-index: index($elements, main-content);
 
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background: linear-gradient(to top, rgba($background, .5), rgba($background, 0));
-
-    .no-cssgradients & {
-      display: none;
-    }
-  }
 
   h2 {
     @include font-size(20px);
@@ -269,26 +267,87 @@ footer {
   outline: none;
 }
 
-.flag-uk {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background: url('flag-uk.png') no-repeat;
-  background-position: 0 0;
+.flag-link {
+  display: inline-block !important;
+  text-decoration: none;
+  margin: 0 2px;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+  width: auto !important;
+  height: auto !important;
+  background: none !important;
+  padding: 0.4em 0.3em !important;
+
+  &:hover {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
+
+  @include MQ(M) {
+    font-size: 16px !important;
+    padding: 0.5em 0.35em !important;
+  }
+
+  @include MQ(L) {
+    font-size: 18px !important;
+    padding: 0.6em 0.4em !important;
+  }
 }
 
-.flag-ru {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background: url('flag-ru.png') no-repeat;
-  background-position: 0 0;
+.cd-main-nav {
+  li.lang {
+    display: block;
+    padding-left: 5%;
+    background: $background;
+    border: 1px solid lighten($background, 3%);
+    height: $header-height-S;
+    line-height: $header-height-S;
+    text-align: left;
+
+    @include MQ(L) {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 0;
+      background: transparent;
+      border: none;
+      height: auto;
+      line-height: normal;
+      text-align: inherit;
+    }
+  }
+
+  li.lang .flag-link {
+    display: inline-block !important;
+    height: auto !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+    margin: 0 5px !important;
+    font-size: 18px !important;
+    vertical-align: middle;
+    background: transparent !important;
+    border: none !important;
+    width: auto !important;
+
+    @include MQ(M) {
+      font-size: 20px !important;
+      margin: 0 6px !important;
+    }
+
+    @include MQ(L) {
+      font-size: 18px !important;
+      padding: 0.6em 0.4em !important;
+      margin: 0 2px !important;
+    }
+  }
 }
 
 .cd-top {
   display: inline-block;
   height: 40px;
   width: 40px;
+  border-radius: 50%;
 
   position: fixed;
   bottom: 40px;
@@ -363,26 +422,32 @@ img {
 }
 
 #notice_wrapper {
-  position: absolute;
-  top: 0;
-  width: 100%;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 400px;
   z-index: 999;
-  background: rgba(135, 216, 211, 0.85);
+  background: rgba(135, 216, 211, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   .alert,
   .notice {
-    padding: 2.5rem 0;
+    padding: 12px 20px;
     text-align: center;
     margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 500;
     color: #FFFFFF;
-    letter-spacing: 1px;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
   }
 }
 
 .dropdown {
   display: none;
+  position: relative;
 
   @include MQ(L) {
     display: inline-block;
@@ -411,12 +476,19 @@ img {
   font-weight: bold;
 }
 
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #fff;
   min-width: 160px;
   z-index: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  margin-top: 4px;
 }
 
 .dropdown-content a {

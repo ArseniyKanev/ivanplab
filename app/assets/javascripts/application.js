@@ -1,15 +1,3 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 //= require jquery
 //= require jquery_ujs
 //= require rails.validations
@@ -52,16 +40,11 @@
 //= require_tree .
 
 $(document).ready(function ($) {
-  // browser window scroll (in pixels) after which the "back to top" link is shown
   var offset = 300,
-    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
     offset_opacity = 1200,
-    //duration of the top scrolling animation (in ms)
     scroll_top_duration = 700,
-    //grab the "back to top" link
     $back_to_top = $(".cd-top");
 
-  //hide or show the "back to top" link
   $(window).scroll(function () {
     $(this).scrollTop() > offset
       ? $back_to_top.addClass("cd-is-visible")
@@ -72,12 +55,11 @@ $(document).ready(function ($) {
   });
 
   setTimeout(() => {
-    $("#notice_wrapper").fadeOut("slow", () => {
+    $("#notice_wrapper").fadeOut(300, () => {
       $(this).remove();
     });
-  }, 4500);
+  }, 2500);
 
-  //smooth scroll to top
   $back_to_top.on("click", function (event) {
     event.preventDefault();
     $("body,html").animate(
@@ -93,16 +75,26 @@ $(document).ready(function ($) {
       $(this).children("ul").toggleClass("is-visible");
   });
 
-  $(".dropbtn").on("click", function (event) {
-    document.getElementById("myDropdown").classList.toggle("show");
-  });
 
-  window.onclick = function (e) {
-    if (!e.target.matches('.dropbtn')) {
-      var myDropdown = document.getElementById("myDropdown");
-      if (myDropdown.classList.contains('show')) {
-        myDropdown.classList.remove('show');
-      }
+  $('.file-input').on('change', function () {
+    var fileName = $(this).val().split('\\').pop();
+    var $fileDisplay = $(this).closest('.inline-form').find('.file-name-display');
+    var $fileLabel = $(this).closest('.inline-form').find('.file-label-text');
+
+    if (fileName) {
+      $fileDisplay.text(fileName).css({
+        'margin-left': '8px',
+        'font-size': '13px',
+        'color': '#666',
+        'max-width': '200px',
+        'overflow': 'hidden',
+        'text-overflow': 'ellipsis',
+        'white-space': 'nowrap'
+      });
+      $fileLabel.text('Change File');
+    } else {
+      $fileDisplay.text('');
+      $fileLabel.text('Choose File');
     }
-  }
+  });
 });
