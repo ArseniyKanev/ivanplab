@@ -73,6 +73,10 @@ class FilesController < ApplicationController
     private
 
     def check_user_signed_in
+      if request.path.start_with?('/knowledge_base')
+        return
+      end
+
       if !user_signed_in?
         flash[:notice] = I18n.t 'only_registered'
         redirect_to :root
@@ -80,7 +84,7 @@ class FilesController < ApplicationController
     end
 
     def set_current_directory
-      base_directory = Rails.root.join('public', 'uploads', 'sharing')
-      @current_directory = params[:dir] ? File.join(base_directory, params[:dir]) : base_directory
+      @base_directory = Rails.root.join('public', 'uploads')
+      @current_directory = params[:dir] ? File.join(@base_directory, params[:dir]) : @base_directory
     end
   end
