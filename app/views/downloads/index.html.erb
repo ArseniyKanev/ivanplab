@@ -12,7 +12,7 @@
           <% previous_dir = File.dirname(params[:dir]) %>
           <%= link_to download_path(dir: previous_dir), class: "breadcrumb-link" do %>
             <%= fa_icon "arrow-left", class: "fa-sm" %>
-            <span>Back</span>
+            <span><%= t('downloads.back') %></span>
           <% end %>
         <% end %>
         <div class="current-path">
@@ -25,8 +25,8 @@
         <div class="admin-actions">
           <div class="action-card">
             <%= form_with url: downloads_create_folder_path, local: true, class: "inline-form" do %>
-              <%= text_field_tag :folder_name, nil, placeholder: "Folder name", class: "modern-input" %>
-              <%= submit_tag "Create Folder", class: "btn-modern btn-primary" %>
+              <%= text_field_tag :folder_name, nil, placeholder: t('downloads.folder_name'), class: "modern-input" %>
+              <%= submit_tag t('downloads.create_folder'), class: "btn-modern btn-primary" %>
               <%= hidden_field_tag :dir, @current_directory.to_s.gsub(@base_directory.to_s, '') %>
             <% end %>
           </div>
@@ -36,10 +36,10 @@
               <label class="file-upload-btn">
                 <%= file_field_tag :file, class: "file-input" %>
                 <%= fa_icon "upload", class: "fa-sm" %>
-                <span class="file-label-text">Choose File</span>
+                <span class="file-label-text"><%= t('downloads.choose_file') %></span>
               </label>
               <span class="file-name-display"></span>
-              <%= submit_tag "Upload", class: "btn-modern btn-secondary" %>
+              <%= submit_tag t('downloads.upload'), class: "btn-modern btn-secondary" %>
               <%= hidden_field_tag :dir, @current_directory.to_s.gsub(@base_directory.to_s, '') %>
             <% end %>
           </div>
@@ -52,7 +52,7 @@
         <div class="folders-section">
           <h3 class="section-title">
             <%= fa_icon "folder", class: "fa-sm" %>
-            <span>Folders</span>
+            <span><%= t('downloads.folders') %></span>
           </h3>
           <ul class="folders-list">
             <% @directories.each do |directory| %>
@@ -78,7 +78,7 @@
         <div class="files-section">
           <h3 class="section-title">
             <%= fa_icon "file", class: "fa-sm" %>
-            <span>Files</span>
+            <span><%= t('downloads.files') %></span>
           </h3>
           <ul class="files-list">
             <% @files.each do |file| %>
@@ -103,10 +103,10 @@
       <% if @directories.empty? && @files.empty? %>
         <div class="empty-state">
           <%= fa_icon "folder-open", class: "fa-2x" %>
-          <p>This folder is empty</p>
+          <p><%= t('downloads.empty_folder') %></p>
         </div>
       <% end %>
     </div>
   </div>
-  <a href="#0" class="cd-top">Top</a>
+  <a href="#0" class="cd-top"><%= t('downloads.top') %></a>
 </main>
