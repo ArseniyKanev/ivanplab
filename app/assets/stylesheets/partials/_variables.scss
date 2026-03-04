@@ -1,26 +1,12 @@
-// colors
-
 $background: #2e313d;
 $color-1: #03bb91;
 $color-2: #f0f1e7;
 $color-3: #65676f;
 $color-4: #1eaf54;
-
-//header height
-
 $header-height-S: 50px;
 $header-height-M: 70px;
-
-//intro height
-
 $intro-height-S: 150px;
 $intro-height-M: 250px;
 $intro-height-L: 350px;
-
-// fonts
-
 $primary-font: 'Ubuntu', sans-serif;
-
-//z-index - order the elements from the lowest z-index(left) to the highest(right)
-
 $elements: intro-image, main-content, navigation;

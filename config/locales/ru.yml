@@ -10,8 +10,35 @@ ru:
   delete_request: "Заявка на удаление аккаунта отправлена."
   more: "ЕЩЁ"
   files: "Файлы"
+  downloads:
+    back: "Назад"
+    folder_name: "Имя папки"
+    create_folder: "Создать папку"
+    choose_file: "Выбрать файл"
+    upload: "Загрузить"
+    folders: "Папки"
+    files: "Файлы"
+    empty_folder: "Эта папка пуста"
+    top: "Вверх"
+  toasts:
+    folder_created: "Папка '%{folder_name}' успешно создана."
+    folder_exists: "Папка '%{folder_name}' уже существует."
+    file_uploaded: "Файл '%{file_name}' успешно загружен."
+    no_file_selected: "Файл не выбран."
+    file_deleted: "Файл успешно удалён."
+    file_not_found: "Файл не найден."
+    folder_deleted: "Папка и её содержимое успешно удалены."
+    folder_not_found: "Папка не найдена."
+    admins_only: "Только для администраторов"
 
   activerecord:
+    attributes:
+      user:
+        email: "Электронная почта"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        remember_me: "Запомнить меня"
+        current_password: "Текущий пароль"
     errors:
       models:
         user:
