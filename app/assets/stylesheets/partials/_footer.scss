@@ -1,0 +1,15 @@
+footer {
+  text-align: center;
+  min-height: 50px;
+  padding: 15px 0;
+  color: $color-2;
+
+  & a {
+    color: $color-2;
+  }
+
+  & div {
+    width: 50%;
+    margin: 10px auto;
+  }
+}

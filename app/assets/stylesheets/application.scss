@@ -3,7 +3,12 @@
 @import "partials/variables";
 @import "partials/mixins";
 @import "partials/layout";
-@import "style";
+@import "partials/base";
+@import "partials/header";
+@import "partials/content";
+@import "partials/footer";
+@import "partials/components";
+@import "partials/devise";
 @import "files";
 @import "font-awesome";
 @import "froala_editor.min";
