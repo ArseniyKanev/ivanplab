@@ -18,11 +18,12 @@ Rails.application.routes.draw do
   post 'files/create_folder', to: 'files#create_folder'
   post 'files/upload_file', to: 'files#upload_file'
 
+  post '/contact', to: 'contacts#create'
+
   post "/upload_file" => "upload#upload_file", as: :upload_file
   post "/upload_image" => "upload#upload_image", as: :upload_image
   get "/download_file/:name" => "upload#access_file", as: :upload_access_file, name: /.*/
-  root 'tabs#show'
-  get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
+  root 'home#index'
   get '/admin', to: redirect('/admin/resources')
 
   resources :tabs, path: '', only: :show

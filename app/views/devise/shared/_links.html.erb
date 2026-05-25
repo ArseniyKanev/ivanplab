@@ -1,6 +1,8 @@
 <div class="devise-links">
   <% if controller_name != 'sessions' %>
     <%= link_to t(".sign_in", :default => "Sign in"), new_session_path(resource_name) %><br />
+  <% else %>
+    <%= link_to "На главную", "https://landing.ivanplab.ru" %><br />
   <% end %>
 
   <% if devise_mapping.recoverable? && controller_name != 'passwords' %>

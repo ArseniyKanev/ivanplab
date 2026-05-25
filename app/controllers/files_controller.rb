@@ -79,7 +79,7 @@ class FilesController < ApplicationController
 
       if !user_signed_in?
         flash[:notice] = I18n.t 'only_registered'
-        redirect_to :root
+        redirect_to new_user_session_path
       end
     end
 
