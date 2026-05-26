@@ -1,5 +1,5 @@
 class ContactMailer < ApplicationMailer
-  default to: 'admin@ivanplab.ru'
+  default to: 'iplab@ivanplab.ru'
 
   def notify(name:, email:, company:, message:)
     @name    = name.to_s.strip
