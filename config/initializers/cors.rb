@@ -1,9 +1,9 @@
-# Allow cross-origin requests from the static landing site (landing.ivanplab.ru)
+# Allow cross-origin requests from the static landing site (ivanplab.ru)
 # to public endpoints (currently only the contact form).
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://landing.ivanplab.ru',
-            'http://landing.ivanplab.ru',
+    origins 'https://ivanplab.ru',
+            'http://ivanplab.ru',
             'http://localhost:8000',
             'http://localhost:8080',
             'http://localhost:3000',
