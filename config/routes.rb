@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post "/upload_image" => "upload#upload_image", as: :upload_image
   get "/download_file/:name" => "upload#access_file", as: :upload_access_file, name: /.*/
   root 'home#index'
+  get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
   get '/admin', to: redirect('/admin/resources')
 
   resources :tabs, path: '', only: :show

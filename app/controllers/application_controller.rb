@@ -7,7 +7,11 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
 
   def set_locale
-    I18n.locale = :ru
+    if cookies[:educator_locale] && I18n.available_locales.include?(cookies[:educator_locale].to_sym)
+      I18n.locale = cookies[:educator_locale].to_sym
+    else
+      I18n.locale = I18n.default_locale
+    end
   end
 
   def error404
